@@ -1,0 +1,3 @@
+# Vercel installs dependencies and builds dist itself
+node_modules
+dist
