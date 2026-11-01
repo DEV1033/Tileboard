@@ -65,7 +65,7 @@ button.start { min-height: 40px; padding: 0 18px; font-size: 14px; }
 
 /* ---------- HUD ---------- */
 .hud {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 35; /* above the pause / result overlays so Home and Restart stay usable */
   display: flex; align-items: center; justify-content: center;
   padding: calc(16px + var(--safe-t)) calc(16px + var(--safe-r)) 0 calc(16px + var(--safe-l));
   pointer-events: none; opacity: 0; transition: opacity .3s;
@@ -124,9 +124,9 @@ body.playing .hud { opacity: 1; }
   /* transparent: the live 3D board (same #1e1e1e canvas) shows through in the visual column */
   position: fixed; inset: 0; z-index: 50; display: flex; flex-direction: column; overflow: hidden; background: transparent;
   padding: calc(20px + var(--safe-t)) calc(24px + var(--safe-r)) calc(24px + var(--safe-b)) calc(24px + var(--safe-l));
-  transition: opacity .45s ease, visibility .45s;
+  transition: opacity .45s ease, visibility 0s; /* visible at once when coming back, so focus can land on Play */
 }
-.hero.leaving { opacity: 0; visibility: hidden; }
+.hero.leaving { opacity: 0; visibility: hidden; transition: opacity .45s ease, visibility 0s .45s; }
 /* A faint indigo glow from the top left, behind the copy */
 .hero-glow {
   position: absolute; inset: 0; z-index: -1; pointer-events: none;

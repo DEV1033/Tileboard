@@ -46,7 +46,8 @@ export class Game {
       reset: () => this.restart(),
       togglePause: () => this.togglePause(),
       calibrate: () => { this.device.calibrate(); this.ui.toast('Calibrated'); },
-      restart: () => this.restart()
+      restart: () => this.restart(),
+      home: () => this.home()
     });
     this.sceneMgr = new SceneManager(this.stage, this.mobile, { game: (w, h) => this.ui.gameFrame(w, h), hero: () => this.ui.heroFrame() });
     this.sceneMgr.scene.add(this.board);
@@ -115,6 +116,17 @@ export class Game {
     if (!this.state.started) return;
     if (this.state.paused) this.togglePause();
     this.reset();
+  }
+
+  /** Home button / Esc: back to the landing page; the board glides back into the hero column. */
+  home(): void {
+    if (!this.state.started) return;
+    if (this.state.paused) this.togglePause();
+    this.state.started = false;
+    this.reset();
+    this.device.disable(); this.joystick.setVisible(false); this.ui.showCalibrate(false);
+    this.ui.showStart();
+    this.sceneMgr.setHero(true);
   }
 
   togglePause(): void {

@@ -9,6 +9,7 @@ export interface UIHandlers {
   togglePause(): void;
   calibrate(): void;
   restart(): void;
+  home(): void;
 }
 
 /** Time as m:ss.t (tenths), e.g. 1:07.4 */
@@ -27,9 +28,14 @@ export class GameUI {
     $('btn-resume').addEventListener('click', () => h.togglePause());
     $('btn-calibrate').addEventListener('click', () => h.calibrate());
     $('btn-again').addEventListener('click', () => h.restart());
+    $('btn-home').addEventListener('click', () => h.home());
   }
 
   hideStart(): void { $('hero').classList.add('leaving'); document.body.classList.add('playing'); }
+  showStart(): void {
+    $('hero').classList.remove('leaving'); document.body.classList.remove('playing');
+    $('btn-hero').focus({ preventScroll: true });
+  }
 
   setPaused(p: boolean): void {
     $('pause').hidden = !p;
