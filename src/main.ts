@@ -2,8 +2,10 @@ import './styles/main.css';
 import { Game } from './game/Game';
 import { GameUI } from './ui/GameUI';
 import { initTheme } from './ui/theme';
+import { inject } from '@vercel/analytics';
 
 initTheme();
+inject();
 
 function webglAvailable(): boolean {
   try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch { return false; }
